@@ -1,6 +1,6 @@
-import 'package:tutorial6/main.dart';
+import 'package:flutter_application_1/page/form.dart';
 import 'package:flutter/material.dart';
-import 'package:tutorial6/page/to_do_page.dart';
+import 'package:flutter_application_1/page/to_do_page.dart';
 
 
 class MyFormPage extends StatefulWidget {
@@ -53,7 +53,7 @@ class _MyFormPageState extends State<MyFormPage> {
                 // Route menu ke halaman utama
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => const MyHomePage()),
+                  MaterialPageRoute(builder: (context) => MyHomePage()),
                 );
               },
             ),
