@@ -1,306 +1,153 @@
 import 'package:flutter_application_1/page/form.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_application_1/page/to_do_page.dart';
+import 'package:flutter/material.dart';
 
-
-class MyFormPage extends StatefulWidget {
-  const MyFormPage({super.key});
-
-  @override
-  State<MyFormPage> createState() => _MyFormPageState();
+void main() {
+  runApp(const MyApp());
 }
 
-class _MyFormPageState extends State<MyFormPage> {
-  final _formKey = GlobalKey<FormState>();
-  String _namaLengkap = "";
-  bool jenjangSarjana = false;
-  bool jenjangDiploma = false;
-  bool jenjangMagister = false;
-  bool jenjangDoktor = false;
-  double umur = 0;
-  String kelasPBP = 'A';
-  List<String> listKelasPBP = ['A', 'B', 'C', 'D', 'E', 'F', 'KI'];
-  bool _nilaiSwitch = false;
+class MyApp extends StatelessWidget {
+    const MyApp({super.key});
 
-  String getJenjang() {
-    String jenjang = jenjangDiploma
-        ? 'Diploma'
-        : jenjangSarjana == true
-            ? 'Sarjana'
-            : jenjangMagister
-                ? 'Magister'
-                : jenjangDoktor
-                    ? 'Doktor'
-                    : 'Tidak terdefinisi';
-    return jenjang;
+    // This widget is the root of your application.
+    @override
+    Widget build(BuildContext context) {
+        return MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+            // This is the theme of your application.
+            //
+            // Try running your application with "flutter run". You'll see the
+            // application has a blue toolbar. Then, without quitting the app, try
+            // changing the primarySwatch below to Colors.green and then invoke
+            // "hot reload" (press "r" in the console where you ran "flutter run",
+            // or simply save your changes to "hot reload" in a Flutter IDE).
+            // Notice that the counter didn't reset back to zero; the application
+            // is not restarted.
+            primarySwatch: Colors.blue,
+        ),
+        home: const MyHomePage(),
+        );
+    }
+}
+
+class MyHomePage extends StatefulWidget {
+    const MyHomePage({super.key});
+
+    // This widget is the home page of your application. It is stateful, meaning
+    // that it has a State object (defined below) that contains fields that affect
+    // how it looks.
+
+    // This class is the configuration for the state. It holds the values (in this
+    // case the title) provided by the parent (in this case the App widget) and
+    // used by the build method of the State. Fields in a Widget subclass are
+    // always marked "final".
+    
+    final String title = 'Flutter Demo Home Page';
+
+    @override
+    State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  int _counter = 0;
+
+  void _incrementCounter() {
+    setState(() {
+      // This call to setState tells the Flutter framework that something has
+      // changed in this State, which causes it to rerun the build method below
+      // so that the display can reflect the updated values. If we changed
+      // _counter without calling setState(), then the build method would not be
+      // called again, and so nothing would appear to happen.
+      _counter++;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    // This method is rerun every time setState is called, for instance as done
+    // by the _incrementCounter method above.
+    //
+    // The Flutter framework has been optimized to make rerunning build methods
+    // fast, so that you can just rebuild anything that needs updating rather
+    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        title: Text('Form'),
+        title: Text(widget.title),
       ),
-
       // Menambahkan drawer menu
       drawer: Drawer(
-        child: Column(
-          children: [
-            // Menambahkan clickable menu
-            ListTile(
-              title: const Text('Counter'),
-              onTap: () {
-                // Route menu ke halaman utama
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => MyHomePage()),
-                );
-              },
-            ),
-            ListTile(
-              title: const Text('Form'),
-              onTap: () {
-                // Route menu ke halaman form
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const MyFormPage()),
-                );
-              },
-            ),
-            ListTile(
-              title: const Text('To Do'),
-              onTap: () {
-                  // Route menu ke halaman to do
+          child: Column(
+            children: [
+              // Menambahkan clickable menu
+              ListTile(
+                title: const Text('Counter'),
+                onTap: () {
+                  // Route menu ke halaman utama
                   Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const ToDoPage()),
+                    context,
+                    MaterialPageRoute(builder: (context) => const MyHomePage()),
                   );
-              },
+                },
+              ),
+              ListTile(
+                title: const Text('Form'),
+                onTap: () {
+                  // Route menu ke halaman form
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => const MyFormPage()),
+                  );
+                },
+              ),
+              ListTile(
+                title: const Text('To Do'),
+                onTap: () {
+                    // Route menu ke halaman to do
+                    Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => const ToDoPage()),
+                    );
+                },
+              ),
+            ],
+          ),
+        ),
+      body: Center(
+        // Center is a layout widget. It takes a single child and positions it
+        // in the middle of the parent.
+        child: Column(
+          // Column is also a layout widget. It takes a list of children and
+          // arranges them vertically. By default, it sizes itself to fit its
+          // children horizontally, and tries to be as tall as its parent.
+          //
+          // Invoke "debug painting" (press "p" in the console, choose the
+          // "Toggle Debug Paint" action from the Flutter Inspector in Android
+          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
+          // to see the wireframe for each widget.
+          //
+          // Column has various properties to control how it sizes itself and
+          // how it positions its children. Here we use mainAxisAlignment to
+          // center the children vertically; the main axis here is the vertical
+          // axis because Columns are vertical (the cross axis would be
+          // horizontal).
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const Text(
+              'You have clicked the button this many times',
+            ),
+            Text(
+              '$_counter',
+              style: Theme.of(context).textTheme.headline4,
             ),
           ],
         ),
       ),
-
-      body: Form(
-        key: _formKey,
-        child: SingleChildScrollView(
-          child: Container(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              children: [
-                Padding(
-                  // Menggunakan padding sebesar 8 pixels
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      hintText: "Contoh: Pak Dengklek",
-                      labelText: "Nama Lengkap",
-                      // Menambahkan icon agar lebih intuitif
-                      icon: const Icon(Icons.people),
-                      // Menambahkan circular border agar lebih rapi
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5.0),
-                      ),
-                    ),
-                    // Menambahkan behavior saat nama diketik
-                    onChanged: (String? value) {
-                      setState(() {
-                        _namaLengkap = value!;
-                      });
-                    },
-                    // Menambahkan behavior saat data disimpan
-                    onSaved: (String? value) {
-                      setState(() {
-                        _namaLengkap = value!;
-                      });
-                    },
-                    // Validator sebagai validasi form
-                    validator: (String? value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Nama lengkap tidak boleh kosong!';
-                      }
-                      return null;
-                    },
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const ListTile(
-                        leading: Icon(Icons.school),
-                        title: Text("Jenjang"),
-                      ),
-                      CheckboxListTile(
-                        title: const Text('Sarjana'),
-                        value: jenjangSarjana,
-                        onChanged: (bool? value) {
-                          setState(() {
-                            jenjangSarjana = value!;
-                            if (value) {
-                              jenjangMagister =
-                                  jenjangDiploma = jenjangDoktor = false;
-                            }
-                          });
-                        },
-                      ),
-                      CheckboxListTile(
-                        title: const Text('Diploma'),
-                        value: jenjangDiploma,
-                        onChanged: (bool? value) {
-                          setState(() {
-                            jenjangDiploma = value!;
-                            if (value) {
-                              jenjangMagister =
-                                  jenjangSarjana = jenjangDoktor = false;
-                            }
-                          });
-                        },
-                      ),
-                      CheckboxListTile(
-                        title: const Text('Magister'),
-                        value: jenjangMagister,
-                        onChanged: (bool? value) {
-                          setState(() {
-                            jenjangMagister = value!;
-                            if (value) {
-                              jenjangDiploma =
-                                  jenjangSarjana = jenjangDoktor = false;
-                            }
-                          });
-                        },
-                      ),
-                      CheckboxListTile(
-                        title: const Text('Doktor'),
-                        value: jenjangDoktor,
-                        onChanged: (bool? value) {
-                          setState(() {
-                            jenjangDoktor = value!;
-                            if (value) {
-                              jenjangMagister =
-                                  jenjangSarjana = jenjangDiploma = false;
-                            }
-                          });
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-                ListTile(
-                  leading: const Icon(Icons.co_present),
-                  title: Row(
-                    children: [
-                      Text('Umur: ${umur.round()}'),
-                    ],
-                  ),
-                  subtitle: Slider(
-                    value: umur,
-                    max: 100,
-                    divisions: 100,
-                    label: umur.round().toString(),
-                    onChanged: (double value) {
-                      setState(() {
-                        umur = value;
-                      });
-                    },
-                  ),
-                ),
-                ListTile(
-                  leading: const Icon(Icons.class_),
-                  title: const Text(
-                    'Kelas PBP',
-                  ),
-                  trailing: DropdownButton(
-                    value: kelasPBP,
-                    icon: const Icon(Icons.keyboard_arrow_down),
-                    items: listKelasPBP.map((String items) {
-                      return DropdownMenuItem(
-                        value: items,
-                        child: Text(items),
-                      );
-                    }).toList(),
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        kelasPBP = newValue!;
-                      });
-                    },
-                  ),
-                ),
-                SwitchListTile(
-                  title: const Text('Practice Mode'),
-                  value: _nilaiSwitch,
-                  onChanged: (bool value) {
-                    setState(() {
-                      _nilaiSwitch = value;
-                    });
-                  },
-                  secondary: const Icon(Icons.run_circle_outlined),
-                ),
-                TextButton(
-                    child: const Text(
-                      "Simpan",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(Colors.blue),
-                    ),
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return Dialog(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              elevation: 15,
-                              child: Container(
-                                child: ListView(
-                                  padding: const EdgeInsets.only(
-                                      top: 20, bottom: 20),
-                                  shrinkWrap: true,
-                                  children: <Widget>[
-                                    Center(child: const Text('Informasi Data')),
-                                    SizedBox(height: 20),
-                                    // TODO: Munculkan informasi yang didapat dari form
-                                    Text('Nama: $_namaLengkap\n'
-                                        'Jenjang: ' +  getJenjang() + '\n'
-                                        'Umur: $umur\n'
-                                        'Kelas PBP: $kelasPBP\n'
-                                        'Practice mode: $_nilaiSwitch\n '),
-                                    TextButton(
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                      },
-                                      child: Text('Kembali'),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            );
-                          },
-                        );
-                      }
-                    }),
-              ],
-            ),
-          ),
-        ),
-      ),
-
-      // body: Center(
-      //     child: Column(
-      //         mainAxisAlignment: MainAxisAlignment.center,
-      //         children: <Widget>[
-      //             Text('Hello World!'),
-      //         ],
-      //     ),
-      // ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Increment',
+        child: const Icon(Icons.add),
+      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
